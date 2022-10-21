@@ -4,7 +4,7 @@
 int main(){
     sf::RenderWindow window(sf::VideoMode(1293, 1293), "Game LIFE");
     window.setFramerateLimit(60);
-    sf::Event event;
+    sf::Event event{};
     bool stop = true;
     fill_field();
     while (window.isOpen()){
