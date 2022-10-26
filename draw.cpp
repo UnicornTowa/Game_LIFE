@@ -70,9 +70,10 @@ void calc_next_state(){
 }
 
 void click(sf::Vector2i coord, sf::RenderWindow& window){
-    int x = coord.x;
-    int y = coord.y;
-    field[(int)(trunc((double)(x - 3) / 43))][(int)(trunc((double)(y - 3) / 43))].is_alive ^= 1;
+    int x = (int)(trunc((double)(coord.x - 3) / 43));
+    int y = (int)(trunc((double)(coord.y - 3) / 43));
+    field[x][y].is_alive ^= 1;
+    field[x][y].change_state = false;
     draw_field(window);
 }
 
