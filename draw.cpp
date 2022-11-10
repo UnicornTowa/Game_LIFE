@@ -1,14 +1,16 @@
 #include "header.h"
 
-
+/// Структура
 struct my_Node{
     bool is_alive = false;
     bool change_state = false;
     my_Node()= default;
 };
 
+/// Контейнер для "клеток"
 static my_Node field[30][30];
 
+/// Заполнение массива клетками
 void fill_field(){
     for(auto & i : field) {
         for (auto & j : i) {
@@ -17,6 +19,7 @@ void fill_field(){
     }
 }
 
+/// Отрисовка клеток
 void draw_field(sf::RenderWindow& window){
     for(int i = 0; i < 30; i++){
         for(int j = 0; j < 30; j++){
@@ -29,6 +32,7 @@ void draw_field(sf::RenderWindow& window){
     }
 }
 
+/// Обновление состояния клеток
 void update_field(){
     for(auto & i : field){
         for(auto & j : i){
@@ -38,6 +42,7 @@ void update_field(){
     }
 }
 
+/// Подсчет числа соседей клетки
 int calc_alive_neighbours(int i, int j){
     int q = 0;
     for(int k = -1; k <= 1; k++){
@@ -53,6 +58,7 @@ int calc_alive_neighbours(int i, int j){
     return q;
 }
 
+/// Расчет следующего состояния поля
 void calc_next_state(){
     for(int i = 0; i < 30; i++){
         for(auto j = 0; j < 30; j++){
@@ -69,6 +75,7 @@ void calc_next_state(){
     }
 }
 
+/// Изменение состояния клетки на которую кликнул пользователь
 void click(sf::Vector2i coord, sf::RenderWindow& window){
     int x = (int)(trunc((double)(coord.x - 3) / 43));
     int y = (int)(trunc((double)(coord.y - 3) / 43));
@@ -77,6 +84,7 @@ void click(sf::Vector2i coord, sf::RenderWindow& window){
     draw_field(window);
 }
 
+/// Сброс игрового поля (состояния всех клеток)
 void reset_field(sf::RenderWindow& window){
     for(auto & i : field) {
         for (auto & j : i) {
@@ -87,10 +95,12 @@ void reset_field(sf::RenderWindow& window){
     draw_field(window);
 }
 
+/// Объекты для генерации случайных чисел
 std::random_device dev;
 std::mt19937 rng(dev());
 std::uniform_int_distribution<std::mt19937::result_type> dist(0,1);
 
+/// Заполнение игрового поля случайными клетками
 void fill_random(sf::RenderWindow& window){
     for(auto & i : field) {
         for (auto & j : i) {
