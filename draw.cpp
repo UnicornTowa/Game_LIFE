@@ -1,23 +1,14 @@
 #include "header.h"
 
 /// Структура
-struct my_Node{
+struct Node{
     bool is_alive = false;
     bool change_state = false;
-    my_Node()= default;
+    Node()= default;
 };
 
 /// Контейнер для "клеток"
-static my_Node field[30][30];
-
-/// Заполнение массива клетками
-void fill_field(){
-    for(auto & i : field) {
-        for (auto & j : i) {
-            j = my_Node();
-        }
-    }
-}
+static Node field[30][30]{};
 
 /// Отрисовка клеток
 void draw_field(sf::RenderWindow& window){
@@ -98,7 +89,7 @@ void reset_field(sf::RenderWindow& window){
 /// Объекты для генерации случайных чисел
 std::random_device dev;
 std::mt19937 rng(dev());
-std::uniform_int_distribution<std::mt19937::result_type> dist(0,1);
+std::uniform_int_distribution<> dist(0,1);
 
 /// Заполнение игрового поля случайными клетками
 void fill_random(sf::RenderWindow& window){

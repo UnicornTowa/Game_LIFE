@@ -10,9 +10,6 @@ int main(){
     /// Состояние паузы
     bool stop = true;
 
-    /// Заполнение массива "клетками"
-    fill_field();
-
     /// Основной цикл
     while (window.isOpen()){
         while (window.pollEvent(event)){
